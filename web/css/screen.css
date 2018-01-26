@@ -1,0 +1,252 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+html, body {
+	height:100%;
+	overflow:hidden;
+}
+
+body {
+	text-align:center; /* center elements in legacy IE */
+	font:normal 85%/120% verdana,arial,helvetica,sans-serif;
+	padding-right:0.5px; /* fix gecko being a retard on calculating absolute positioning */
+}
+
+* html body { /* lte IE6 */
+	behavior:url(csshover2.htc); /* hover/focus anywhere */
+}
+
+#container {
+	height:100%;
+	overflow:auto;
+	position:relative; /* make sure absolutes scroll instead of behaving 'fixed' */
+}
+
+#header {
+	background:url(images/mainMenu.png) 0 -35px repeat-x;
+}
+
+#mainMenu,
+h1,
+#content,
+#footer {
+	width:768px;
+	margin:0 auto;
+	text-align:left;
+}
+
+#mainMenu {
+	list-style:none;
+	height:35px;
+	font:normal 14px/16px arial,helvetica,sans-serif;
+	background:#DA2 url(images/mainMenu.png) 0 -35px repeat-x;
+}
+
+#mainMenu li {
+	float:left;
+	position:relative;
+	z-index:1;
+}
+
+#mainMenu li:active,
+#mainMenu li:focus,
+#mainMenu li:hover {
+	/*
+		changing the z-index on hover makes sure that all the contents
+		depth sort properly, even in IE.
+	*/
+	z-index:2; 
+}
+
+#mainMenu a {
+	display:-moz-inline-block;
+	display:-moz-inline-box;
+	display:inline-block;
+	padding:14px 16px 5px 13px;
+	text-decoration:none;
+	color:#FFF;
+	background:#EB2 url(images/mainMenu.png) 0 -35px no-repeat;
+}
+
+#mainMenu li:active a,
+#mainMenu li:focus a,
+#mainMenu li:hover a,
+#mainMenu .current a {
+	color:#840;
+	background:#FFF url(images/mainMenu.png) 0 0 no-repeat;
+}
+
+#mainMenu span {
+	position:absolute;
+	top:0;
+	right:0;
+	width:16px;
+	height:35px;
+	background:url(images/mainMenu.png) -344px 0 no-repeat;
+}
+
+#mainMenu li:active span,
+#mainMenu li:focus span,
+#mainMenu li:hover span,
+#mainMenu .current span {
+	background-position:-294px 0;
+}
+
+#mainMenu .last span {
+	background-position:0 -35px;
+}
+
+#mainMenu li.last:active span,
+#mainMenu li.last:focus span,
+#mainMenu li.last:hover span {
+	background-position:-310px 0;
+}
+
+#mainMenu ul {
+	list-style:none;
+	position:absolute;
+	display:inline; /* set up for IE fix */
+	width:182px;
+	left:-1000em;
+	top:35px;
+	padding-bottom:6px;
+	background:url(images/subMenu.gif) bottom left no-repeat;
+}
+
+#mainMenu li:active ul,
+#mainMenu li:focus ul,
+#mainMenu li:hover ul {
+	display:block; /* if we don't change display state, IE barfs */
+	left:3px;
+}
+
+#mainMenu ul li {
+	float:none;
+	display:block;
+	width:182px;
+}
+
+/* 
+	using psuedoclasses below means we don't need to state !important
+	putting the li before makes sure IE overrides as well
+*/
+
+#mainMenu li ul a:link,
+#mainMenu li ul a:visited {
+	display:block;
+	height:16px;
+	padding:4px 8px 5px;
+	background:#FFF url(images/subMenu.gif) 0 -1px no-repeat;
+	
+}
+
+#mainMenu li ul a:active,
+#mainMenu li ul a:focus,
+#mainMenu li ul a:hover {
+	color:#000;
+	background:#F7C631 url(images/subMenu.gif) 0 -27px no-repeat;
+}
+
+#mainMenu li:active b,
+#mainMenu li:focus b,
+#mainMenu li:hover b {
+	position:absolute;
+	top:29px;
+	left:3px;
+	width:182px;
+	height:6px;
+	background:url(images/subMenu.gif) 0 -52px no-repeat;
+}
+
+#mainMenu li ul li.last a:link,
+#mainMenu li ul li.last a:visited {
+	padding:4px 8px;
+}
+
+h1 {
+	position:relative;
+	padding:25px 0 70px;
+	text-transform:uppercase;
+	font:bold 18px/20px verdana,arial,helvetica,sans-serif;
+	color:#BBB;
+}
+
+h1 span {
+	position:absolute;
+	top:0;
+	left:0;
+	width:768px;
+	height:115px;
+	/* header picture here */
+}
+
+#contentWrapper {
+	overflow:auto;
+	border-bottom:1px solid #C8C8C8;
+}
+
+#content {
+	width:768px;
+	margin:0 auto;
+}
+
+.productBox {
+	overflow:hidden; /* wrap floats */
+	width:768px; /* trip haslayout to wrap floats IE */
+	padding:16px 0;
+	border-bottom:1px solid #36F;
+}
+
+.productImage {
+	width:256px;
+	float:left;
+}
+
+.productImage img {
+	display:block;
+	margin:0 auto;
+}
+
+.productBox h2 {
+	margin:0 0 1em 256px;
+	margin-left:256px;
+	text-align:center;
+	font:bold 110%/120% verdana,arial,helvetica,sans-serif;
+  color:#158DFC;
+}
+
+.productBox p {
+	text-align:justify;
+	margin:0 0 1em 256px;
+}
+
+.productBox .begi {
+	clear:left;
+	float:right;
+	text-align:right;
+	text-decoration:none;
+	color:#F00;
+}
+
+.productBox .begi:active,
+.productBox .begi:focus,
+.productBox .begi:hover {
+	text-decoration:underline;
+}
+
+#footer {
+	overflow:hidden;
+	padding:8px 0 16px;
+}
+
+#footer img {
+	float:left;
+	border:0;
+	margin-right:87px;
+}
+
+#footer .last img {
+	margin:0;
+}

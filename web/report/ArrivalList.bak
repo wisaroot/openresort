@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ArrivalList"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\FrontWeb\\web\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dateinput2" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="ArrivalListsubreport" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString><![CDATA[select  ga_accno as accno, ga_accstat, ga_acctype, b_seq,  ( case when (ga_guestno > 0) then (gn_fname||' '||gn_lname) else gri_grpname end ), Org.o_id, a_name,
+                 case when(ga_acctype='G')then grp.n_descr else gst.n_descr end as natinality,
+                b_arrdate, ga_arrtime, ga_arrby, ga_departure, ga_deptime,
+                b_adult, b_child, b_qty, b_roomtypeno, b_bedtypeno, rc_descr,
+                rct_descr, b_comp, b_chargeto, block, 
+                ga_guestno, v_descr
+         
+         from booking
+         left join  gaccount ga on (b_accno = ga_accno)
+         left join gfolio gf on (gf_accno = ga_accno)
+         left join guestinfo Gi on (gi_guestno = ga_guestno)
+         left join agent Ag on (ga_agentno = a_id)
+         left join origin Org on (ga_orino = Org.o_id)
+         left join guestname gn on (gn_guestno = ga_guestno)
+         left join groupinfo gri on (ga_grpno = gri_grpno)
+         left join nationality gst on (gi_natno = gst.n_id)
+         left join nationality grp on  (gri_natno = grp.n_id)
+         left join ratecondition rtc on ( b_condno = rct_id  )
+         left join ratecode rt on ( b_rateno = rc_id )
+        left join  block on bl_accno = b_accno and bl_dtlseq = b_seq
+            left join vip on v_id =ga_RSVTYPENO
+        where ( ga_accstat in ('I','C','R') ) and
+              ( b_qty > 0 )]]></queryString>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="2"
+						y="22"
+						width="532"
+						height="50"
+						key="subreport-1"/>
+					<subreportParameter  name="Dateinput2">
+						<subreportParameterExpression><![CDATA[$P{Dateinput2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ArrivalListsubreport}]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

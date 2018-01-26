@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="Guestledgerfolio"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\FrontWeb\\web\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Guestled" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="fol" isForPrompting="false" class="java.lang.Integer"/>
+	<queryString><![CDATA[select ga_accno as accno, gf_folno as folno,gf_room,gf_service,( case when (ga_guestno > 0) then (t_id||gn_fname||' '||gn_lname) else gri_grpname end ),
+            ga_arrival, ga_departure, gi_homeaddr1||gi_homeaddr2 as address,
+            coalesce(gfs1.gfs_folbal, 0)as seq1, coalesce(gfs2.gfs_folbal, 0) as seq2
+        from gaccount ga
+            left join gfolio gf on (ga_accno = gf_accno)
+            left join groupinfo grpi on (ga_grpno = gri_grpno)
+            left join guestname gn
+    on gn_guestno = ga_guestno left join title tt
+    on t_id = gn_titleno
+            left join guestinfo on (gi_guestno = ga_guestno)
+            left join gfolseq gfs1 on (gf_folno = gfs1.gfs_folno)and(gfs1.gfs_folseq = 1)
+            left join gfolseq gfs2 on (gf_folno = gfs2.gfs_folno)and(gfs2.gfs_folseq = 2)
+           
+        where (ga_accstat = 'I')]]></queryString>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="-1"
+						y="18"
+						width="534"
+						height="61"
+						key="subreport-1"/>
+					<subreportParameter  name="fol">
+						<subreportParameterExpression><![CDATA[$P{fol}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{Guestled}]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="318"
+						y="8"
+						width="157"
+						height="23"
+						key="textField-1"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="475"
+						y="8"
+						width="46"
+						height="23"
+						key="textField-2"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="GuestInfoReport"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\FrontWeb\\web\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GuestInfo" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="status" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[select ga_accno as accno, ( case when (ga_guestno > 0) then (gn_fname||' '||gn_lname) else gri_grpname end ), ga_arrival, ga_departure,( case when (gf_adult > 0) then (gf_adult) else b_adult end ), ( case when (gf_child > 0) then (gf_child) else b_child end ),   a_name,na.n_descr
+            
+        from gaccount ga
+         left join booking b on (b_accno = ga_accno)
+           left join gfolio gf on (ga_accno = gf_accno)
+            left join groupinfo grpi on (ga_grpno = gri_grpno)
+            left join guestname gn
+    on gn_guestno = ga_guestno left join title tt
+    on t_id = gn_titleno
+            left join agent ag on (ga_agentno = a_id)
+            left join guestinfo on (ga_guestno = gi_guestno)
+           
+         left join  nationality na on gi_natno =na.n_id]]></queryString>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="8"
+						y="11"
+						width="523"
+						height="57"
+						key="subreport-1"/>
+					<subreportParameter  name="status">
+						<subreportParameterExpression><![CDATA[$P{status}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{GuestInfo}]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

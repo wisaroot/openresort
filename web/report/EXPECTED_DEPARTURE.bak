@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="EXPECTED_DEPARTURE"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["D:\\FrontWeb\\web\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dateinput2" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="DepartlListsubreport" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString><![CDATA[select 
+           coalesce(case when(ga_acctype='G') then '<GRP>'else gf_roomno end, '') as roomno,
+           ( case when (ga_guestno > 0) then (gn_fname||' '||gn_lname) else gri_grpname end ), ga_arrival, ga_deptime,
+           coalesce(Org.o_id, '') as origin, coalesce(ag.a_name, '') as agent,
+           case when(ga_acctype='G')then grp.n_descr else gst.n_descr end as natinality,
+           gf_folno,
+            coalesce(gfs1.gfs_folbal, 0)as seq1, coalesce(gfs2.gfs_folbal, 0) as seq2 ,(coalesce(gfs1.gfs_folbal, 0)+ coalesce(gfs2.gfs_folbal, 0)) as total
+       
+    from gaccount ga
+         left join gfolio gf on (gf_accno = ga_accno)
+         left join guestinfo Gi on (ga_guestno = gi_guestno)
+         left join agent Ag on (ga_agentno = a_id)
+         left join origin Org on (ga_orino = Org.o_id)
+         left join guestname gn on (gn_guestno = ga_guestno)
+         left join groupinfo gri on (ga_grpno = gri_grpno)
+         left join nationality gst on (gi_natno = gst.n_id)
+         left join nationality grp on  (gri_natno = grp.n_id)
+           left join gfolseq gfs1 on (gf_folno = gfs1.gfs_folno)and(gfs1.gfs_folseq = 1)
+            left join gfolseq gfs2 on (gf_folno = gfs2.gfs_folno)and(gfs2.gfs_folseq = 2)
+          
+    where   (ga_accstat = 'I')
+         and(ga_acctype in ('I', 'G', 'H'))
+       
+    order by gf_roomno]]></queryString>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="4"
+						y="18"
+						width="532"
+						height="56"
+						key="subreport-1"/>
+					<subreportParameter  name="Dateinput2">
+						<subreportParameterExpression><![CDATA[$P{Dateinput2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="DepartlListsubreport">
+						<subreportParameterExpression><![CDATA[$P{DepartlListsubreport}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{DepartlListsubreport}]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,130 @@
+<!--
+ * OpenResort PMS is a Web Application Properties Management (PMS) System that captures
+ * all the essential functionalities required for any Front Office Hospitality.
+ * Copyright (C) 2012 Holidays Network Co.,Ltd., http://www.openresort.net
+ *
+ * OpenResort PMS is free software; you can redistribute it and/or modify it under the terms of
+ * GNU General Public License version 3.0 (GPLv3)
+ * , or (at your option) any later version.
+ *
+ * OpenResort PMS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301, USA
+ *
+  --!><!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title></title>
+
+        <script type="text/javascript" src="js/automenu.js"></script>
+        <style type="text/css"  >
+            div#s1 {
+                width: 200px;          /* menu width */
+            }
+
+            div#s1 ul {
+                background-color: #036;
+                list-style-type: none; /* get rid of the bullets */
+                padding:0;             /* no padding */
+                margin:0;              /* no margin for IE either */
+            }
+
+            div#s1 ul li {
+                margin: 0;
+                padding: 0;
+                background-color: #036;
+                display:block;
+                border-top: 1px solid white; /* lines */
+            }
+
+            div#s1 ul li a {
+                display: block;         /* lines extend to right, make area clickable */
+                color: white;
+                background-color: #036;
+                padding: 3px 3px 3px 23px;
+                margin:0;
+                text-decoration: none;
+                height:15px;           /* hint for IE, alternatively remove whitespace from HTML */
+            }
+
+            div#s1 ul ul li a {
+                margin-left: 20px;     /* indent level 1 */
+            }
+
+            div#s1 ul ul ul li a {
+                margin-left: 40px;     /* indent level 2 */
+            }
+
+            div#s1 li ul, div#s1 li.open li.closed ul {
+                display: none;         /* collapse */
+            }
+
+            div#s1 li.open ul {
+                display: block;        /* expand */
+            }
+
+            div#s1 ul li.open a {
+                background-image: url(bullet_open.gif);
+                background-repeat: no-repeat;
+            }
+
+            div#s1 ul li.closed a {
+                background-image: url(bullet_closed.gif);
+                background-repeat: no-repeat;
+            }
+
+            div#s1 ul li.leaf a {
+                background-image: url(bullet_leaf.gif);
+                background-repeat: no-repeat;
+            }
+
+            div#s1 li.active a {
+                background-position: 0px -20px;
+                color: red;            /* highlight text */
+            }
+
+            div#s1 li.active li a {
+                background-position: 0px 0px;
+                color: white;          /* fix lower levels */
+            }
+
+            div#s1 ul li a:hover {
+                color: red;
+                background-color: #06C; /* rollover effect */
+            }
+
+        </style>
+    </head>
+
+    <body onLoad="menu_main('s1')">
+
+        <div id="s1">
+
+            <ul>  <li><a href="#">Things</a></li>
+                <li><a href="#">Animals</a>
+                    <ul>
+                        <li><a href="2-1.php">Cani</a>
+                            <ul>     <li><a href="#">Domestic dogs</a></li>
+                                     <li><a href="#">Wolves</a></li>            </ul>
+                        </li>     
+                        <li><a href="#">Felidae</a>
+                            <ul>      <li><a href="#">Domestic cats</a></li>
+                                      <li><a href="#">Wild cats</a></li>
+                            </ul>        </li>
+
+                    </ul>  </li>
+                <li><a href="#">Humans</a></li></ul>
+
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="GuestLeaderReport"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="GuestLeadersubreport" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="Dateinput1" isForPrompting="false" class="java.util.Date">
+		<defaultValueExpression ><![CDATA[(new java.text.SimpleDateFormat("yyyy-mm-dd").parse("2012-11-07"))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Dateinput2" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="dd" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[(new java.text.SimpleDateFormat("yyyy-mm-dd")).format($P{Dateinput1}) ]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[select ga_accno as accno, gf_folno as folno,gf_room,gf_service,gf_tax,gf_extrabed,gf_extbedserv,gf_extbedtax, gf_roomno as room,( case when (ga_guestno > 0) then (t_id||gn_fname||' '||gn_lname) else gri_grpname end ),
+            ga_arrival, ga_departure, gf_adult, gf_child, a_name,
+            coalesce(gfs1.gfs_folbal, 0)as seq1, coalesce(gfs2.gfs_folbal, 0) as seq2
+        from gaccount ga
+            left join gfolio gf on (ga_accno = gf_accno)
+            left join groupinfo grpi on (ga_grpno = gri_grpno)
+            left join guestname gn
+    on gn_guestno = ga_guestno left join title tt
+    on t_id = gn_titleno
+            left join agent ag on (ga_agentno = a_id)
+            left join gfolseq gfs1 on (gf_folno = gfs1.gfs_folno)and(gfs1.gfs_folseq = 1)
+            left join gfolseq gfs2 on (gf_folno = gfs2.gfs_folno)and(gfs2.gfs_folseq = 2)
+           
+        where (ga_accstat = 'I') and  (to_date($P{Dateinput2}, 'yyyy-mm-dd')    between ga_arrival and  ga_departure )]]></queryString>
+
+	<field name="accno" class="java.lang.Integer"/>
+	<field name="folno" class="java.lang.Integer"/>
+	<field name="gf_room" class="java.math.BigDecimal"/>
+	<field name="gf_service" class="java.math.BigDecimal"/>
+	<field name="gf_tax" class="java.math.BigDecimal"/>
+	<field name="gf_extrabed" class="java.math.BigDecimal"/>
+	<field name="gf_extbedserv" class="java.math.BigDecimal"/>
+	<field name="gf_extbedtax" class="java.math.BigDecimal"/>
+	<field name="room" class="java.lang.String"/>
+	<field name="gri_grpname" class="java.lang.String"/>
+	<field name="ga_arrival" class="java.sql.Date"/>
+	<field name="ga_departure" class="java.sql.Date"/>
+	<field name="gf_adult" class="java.lang.Integer"/>
+	<field name="gf_child" class="java.lang.Integer"/>
+	<field name="a_name" class="java.lang.String"/>
+	<field name="seq1" class="java.math.BigDecimal"/>
+	<field name="seq2" class="java.math.BigDecimal"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<rectangle>
+					<reportElement
+						x="0"
+						y="0"
+						width="535"
+						height="34"
+						key="rectangle-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="0"
+						y="17"
+						width="35"
+						height="15"
+						key="staticText-1"/>
+					<box></box>
+					<textElement textAlignment="Justified">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Room]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="35"
+						y="17"
+						width="98"
+						height="15"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Guest/Group name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="134"
+						y="17"
+						width="24"
+						height="15"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Arr]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="158"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Dep]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="186"
+						y="17"
+						width="30"
+						height="15"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Agent]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="252"
+						y="3"
+						width="39"
+						height="15"
+						key="staticText-6"/>
+					<box></box>
+					<textElement>
+						<font isUnderline="false"/>
+					</textElement>
+				<text><![CDATA[Room]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="225"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="252"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Serv]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="279"
+						y="17"
+						width="29"
+						height="15"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Tax]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="327"
+						y="17"
+						width="26"
+						height="15"
+						key="staticText-10"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Rate]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="353"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Serv]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="381"
+						y="17"
+						width="29"
+						height="15"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Tax]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="348"
+						y="3"
+						width="46"
+						height="15"
+						key="staticText-13"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Extra]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Transparent"
+						x="408"
+						y="2"
+						width="73"
+						height="15"
+						key="staticText-14"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Folio balance]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="481"
+						y="2"
+						width="50"
+						height="15"
+						key="staticText-15"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Folio total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="417"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-16"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[#1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="448"
+						y="17"
+						width="27"
+						height="15"
+						key="staticText-17"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[#2]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="225"
+						y="16"
+						width="250"
+						height="1"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="34"
+						width="535"
+						height="35"
+						key="subreport-1"/>
+					<subreportParameter  name="Dateinput2">
+						<subreportParameterExpression><![CDATA[$P{Dateinput2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{GuestLeadersubreport}]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

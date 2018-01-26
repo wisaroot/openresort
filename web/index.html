@@ -1,0 +1,59 @@
+ <!--
+ * OpenResort PMS is a Web Application Properties Management (PMS) System that captures
+ * all the essential functionalities required for any Front Office Hospitality.
+ * Copyright (C) 2012 Holidays Network Co.,Ltd., http://www.openresort.net
+ *
+ * OpenResort PMS is free software; you can redistribute it and/or modify it under the terms of
+ * GNU General Public License version 3.0 (GPLv3)
+ * , or (at your option) any later version.
+ *
+ * OpenResort PMS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301, USA
+ *
+  --!>
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>
+Validate login from database table using jQuery JSP & jQuery
+</TITLE>
+     
+  <script src="css/jquery-1.5.2.js"></script>
+  <script src="loginValidation.js" type="text/javascript"></script>
+   <style type="text/css">
+.style1 {
+  color: #0000FF;
+}
+.style3 {
+  color: #CC0066;
+}
+</style>
+ </HEAD>
+
+ <BODY>
+   <div>
+<form id="formL" name="formL" method="post" onsubmit="return false;">
+<span class="style3"><strong>Enter Username &amp; Password to Login :
+</strong></span><br>
+<br>
+<span class="style1">Username :&nbsp;</span>&nbsp;
+<input name="user" id="user" type="text">
+
+<br><span class="style1">Password   :</span>&nbsp;&nbsp;
+<input name="pass" id="pass" type="password">
+
+
+<br><input name="button" id="button" value="Submit" type="submit">
+</form>
+</div>
+<div id="targetDiv" style="display: none;">
+</div>
+
+ </BODY>
+</HTML>

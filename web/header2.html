@@ -1,0 +1,148 @@
+<!--
+ * OpenResort PMS is a Web Application Properties Management (PMS) System that captures
+ * all the essential functionalities required for any Front Office Hospitality.
+ * Copyright (C) 2012 Holidays Network Co.,Ltd., http://www.openresort.net
+ *
+ * OpenResort PMS is free software; you can redistribute it and/or modify it under the terms of
+ * GNU General Public License version 3.0 (GPLv3)
+ * , or (at your option) any later version.
+ *
+ * OpenResort PMS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301, USA
+ *
+  --!>
+
+ <head>
+
+
+
+</head><body  bgColor="#0FF">
+
+
+<APPLET code="apPopupMenu.class" codebase="class" height="28" width="1200" mayscript>
+
+<param name="Copyright" value="Apycom.com">
+    <param name="isHorizontal" value="true"> 
+<param name="solidArrows" value="true">
+<param name="backColor" value="66CCFF">
+<param name="fontColor" value="#0FF">
+<param name="fontHighColor" value="FFFF00">
+<param name="buttonType" value="1">
+<param name="pressedItem" value="0">
+<param name="alignText" value="right">
+<param name="font" value="Courier,15,2">
+<param name="menuItems" value="
+        { Booking }
+       {|List Guest,guest/guest.jsp,mainFrame}
+       {|New Guest,guest/newguest.jsp,mainFrame}
+       {|List Group,group/group.jsp,mainFrame}
+       {|New Group,group/newgroup.jsp,mainFrame}
+      {Guest Info}
+       {|Search Individual,guestinfo/individual.jsp,mainFrame}
+ 
+       {|Walk In,walkin/guest.jsp,mainFrame}
+       {|House Used,houseused/guest.jsp,mainFrame}
+ {|GuestHistory,GuestHistory.jsp,mainFrame}
+      
+       {Room Available,RoomAvailable.jsp,mainFrame}
+       
+        {Room Plane,RoomPlane.jsp,mainFrame}
+        
+        {Posting,Posting.jsp,mainFrame}
+        
+         {Checkout,Checkout.jsp,mainFrame}
+         
+         {Night Audit }
+          {|Auto Post Room,AutoPostRoom.jsp,mainFrame}
+       {|Auto Post Other Expenses,AutoPostExpense.jsp,mainFrame}
+       {|End of Day,EndOfDay.jsp,mainFrame}
+          {HK }
+          {|HK Room Status,HKRoomStatus.jsp,mainFrame}
+       {|HK Post Laundry,HKPostLaundry.jsp,mainFrame}
+       {|HK Post Minibar,HKPostMin.jsp,mainFrame}
+{|HK Set up,HKPosttingSetup.jsp,mainFrame}
+         
+        {Set up }
+       {|Room Information }
+       {||Room Info,SetRoomInformation.jsp,mainFrame}
+       {||Room Status,SetRoomStatus.jsp,mainFrame}
+       {||Room Type,SetRoomType.jsp,mainFrame}
+       {||Room Current,SetRoomCurrent.jsp,mainFrame}
+{||Room OOO,SetRoomOoo.jsp,mainFrame}
+        {||Bed Type,SetBedType.jsp,mainFrame}
+       {||Location,SetLocation.jsp,mainFrame}
+       {||Exposure,SetExposure.jsp,mainFrame}
+       {||Facility,SetFacility.jsp,mainFrame}
+       {||Room Group,SetRoomGroup.jsp,mainFrame}
+      
+      
+       {|Agent}
+ {||Agent Type,SetAgentType.jsp,mainFrame}
+       {||Agent ,SetAgent.jsp,mainFrame}
+       {||Sales,SetSales.jsp,mainFrame}
+       {||Contract,main.html,mainFrame}
+        {||Allotment,SetAllotment.jsp,mainFrame}
+        
+       {|Rate}
+       {||Rate Code,SetRateCode.jsp,mainFrame}
+       {||Rate Plane,main.html,mainFrame}
+       {||Rate Template,SetRateTemplate.jsp,mainFrame}
+        {||Rate Condition,SetRateCondition.jsp,mainFrame}
+        
+         {|Department}
+       {||Department Group,SetDepartmentGroup.jsp,mainFrame}
+       {||Department,SetDepartment.jsp,mainFrame}
+       {||Media Group,SetMediaGroup.jsp,mainFrame}
+        {||Media,SetMedia.jsp,mainFrame}
+        
+           {| Market Segment}
+       {||Market Zone,SetMarketZone.jsp,mainFrame}
+       {||Nationality,SetNationality.jsp,mainFrame}
+       {||Country,SetCountry.jsp,mainFrame}
+        {||Origin,SetOrigin.jsp,mainFrame}
+        
+        
+          {| User}
+       {||View User,users/setuser.jsp,mainFrame}
+       {||New User,users/newuser.jsp,mainFrame}
+
+  {| Report}
+       {||GuestLeaderReport,faces/report/GuestLeaderReport.jsp,mainFrame}
+       {||ArrivalList,faces/report/ArrivalListReport.jsp,mainFrame}
+{||DepartureList,faces/report/DepartureListReport.jsp,mainFrame}
+ {||Cityledgerfolio,faces/report/CityledgerfolioReport.jsp,mainFrame}
+       {||GuestInfoReport,faces/report/GuestInfoReport.jsp,mainFrame}
+ 
+     
+
+
+
+     {Log out,login/logout.jsp,mainFrame}
+
+
+
+{_,_,_}
+
+
+">
+</APPLET> 
+<script language="Javascript">
+function changeAll()
+{
+open('login/logout.jsp');
+ topFrame.close();
+
+
+
+}
+</script>
+
+
+
+    </body>
+</html>
